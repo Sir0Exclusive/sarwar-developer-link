@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIR — Sarwar</title>
+</head>
+<body>
+  <p>Redirecting...</p>
+
+  <script>
+    const CONFIG_URL = './config.json';
+
+    fetch(CONFIG_URL, { cache: 'no-store' })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Configuration could not be loaded.');
+        }
+        return response.json();
+      })
+      .then(config => {
+        if (config.website && config.website.trim()) {
+          window.location.replace(config.website.trim());
+        } else {
+          document.body.innerHTML = '<p>Developer website coming soon.</p>';
+        }
+      })
+      .catch(() => {
+        document.body.innerHTML = '<p>Developer website coming soon.</p>';
+      });
+  </script>
+</body>
+</html>
